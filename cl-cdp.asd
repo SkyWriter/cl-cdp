@@ -1,0 +1,88 @@
+(defsystem "cl-cdp"
+  :description "Chrome DevTools Protocol (CDP) client for Common Lisp, auto-generated from the official protocol spec."
+  :author "Your Name"
+  :license "MIT"
+  :version "0.1.0"
+  :depends-on (#:websocket-driver    ; WebSocket client  (ql: websocket-driver)
+               #:yason               ; JSON encode/decode (ql: yason)
+               #:bordeaux-threads    ; Portable threads   (ql: bordeaux-threads)
+               #:dexador             ; HTTP requests      (ql: dexador)
+               #:cl-ppcre            ; Regex for naming   (ql: cl-ppcre)
+               #:split-sequence)     ; String splitting   (ql: split-sequence)
+  :serial t
+  :components
+  ((:module "src/cl-cdp"
+    :serial t
+    :components
+    ((:file "package")
+     (:file "utils")
+     (:file "connection")
+     (:file "protocol")
+     (:file "events")))
+   (:module "generated"
+    :serial t
+    :components
+    ((:file "accessibility")
+     (:file "animation")
+     (:file "audits")
+     (:file "autofill")
+     (:file "background-service")
+     (:file "bluetooth-emulation")
+     (:file "browser")
+     (:file "cache-storage")
+     (:file "cast")
+     (:file "console")
+     (:file "css")
+     (:file "debugger")
+     (:file "device-access")
+     (:file "device-orientation")
+     (:file "dom")
+     (:file "dom-debugger")
+     (:file "dom-snapshot")
+     (:file "dom-storage")
+     (:file "emulation")
+     (:file "event-breakpoints")
+     (:file "extensions")
+     (:file "fed-cm")
+     (:file "fetch")
+     (:file "file-system")
+     (:file "headless-experimental")
+     (:file "heap-profiler")
+     (:file "indexed-db")
+     (:file "input")
+     (:file "inspector")
+     (:file "io")
+     (:file "layer-tree")
+     (:file "log")
+     (:file "media")
+     (:file "memory")
+     (:file "network")
+     (:file "overlay")
+     (:file "page")
+     (:file "performance")
+     (:file "performance-timeline")
+     (:file "preload")
+     (:file "profiler")
+     (:file "pwa")
+     (:file "runtime")
+     (:file "schema")
+     (:file "security")
+     (:file "service-worker")
+     (:file "smart-card-emulation")
+     (:file "storage")
+     (:file "system-info")
+     (:file "target")
+     (:file "tethering")
+     (:file "tracing")
+     (:file "web-audio")
+     (:file "web-authn")))
+   (:file "src/cl-cdp/sugar")))
+
+(defsystem "cl-cdp/codegen"
+  :description "Code generator — reads CDP JSON specs and writes the generated/ files."
+  :depends-on (#:yason
+               #:uiop)    ; uiop:read-file-string — bundled with ASDF, always available
+  :components
+  ((:module "codegen"
+    :components
+    ((:file "generate")))))
