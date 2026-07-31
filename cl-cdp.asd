@@ -77,12 +77,3 @@
      (:file "web-audio")
      (:file "web-authn")))
    (:file "src/cl-cdp/sugar")))
-
-(defsystem "cl-cdp/codegen"
-  :description "Code generator — reads CDP JSON specs and writes the generated/ files."
-  :depends-on (#:yason
-               #:uiop)    ; uiop:read-file-string — bundled with ASDF, always available
-  :components
-  ((:module "codegen"
-    :components
-    ((:file "generate")))))
